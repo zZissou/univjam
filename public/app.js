@@ -1,8 +1,49 @@
 //index Controller
 var univJam = angular.module('univJam', ['ngRoute', 'ngAnimate']);
 
+univJam.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+
+  $locationProvider.html5Mode(true);
+
+  $routeProvider
+    .when('/', {
+    templateUrl: 'home.ejs'
+    })
+    .when('/profile', {
+      templateUrl: 'profile.ejs',
+      controller: 'UnivJamController'
+    })
+    .when('/login', {
+      templateUrl: 'login.ejs'
+    })
+    .when('/signup', {
+      templateUrl: 'signup.ejs'
+    })
+    .when('/playlist', {
+      templateUrl: 'playlist.ejs',
+      controller: 'UnivJamController'
+    }).otherwise({
+      redirectTo: '/'
+    });
+
+}]);
+
 //main controller
 univJam.controller('UnivJamController', ['$scope', function($scope){
+
+  $scope.removePlaylist = function(playlist){
+    var removedPlaylist = $scope.playlists.indexOf(playlist);
+    $scope.playlists.splice(removedPlaylist, 1);
+  }
+
+  $scope.addPlaylist = function(playlist){
+    $scope.playlists.push({
+      name: $scope.newplaylist.name,
+      length: ""
+    });
+
+    $scope.newplaylist.name = "";
+  };
 
   $scope.playlists = [
     {

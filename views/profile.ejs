@@ -1,29 +1,23 @@
 <div class="content">
-   <div ng-controller="PlaylistController">
-      <div class="container text-center">
-         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-               <h1>Profile</h1>
-               <hr>
-               <h2>Welcome! You're logged in as {{user.name}}.</h2>
-               <hr>
-               <h2>My Playlists:</h2>
-               <input type="text" ng-model="search" placeholder="Search for a playlist">
-               <ul>
-                  <a href="{{playlist.name}}"
-                  <li ng-repeat="playlist in playlists | orderBy: order | filter: search">
-                     <p>{{song.name}} - {{song.artist}}</p>
-                  </li>
-                  <div class="remove" ng-click="removePlaylist(playlist)">X</div>
-               </ul>
-               <form ng-submit="addPlaylist()">
-                  <input type="text" placeholder="name" ng-model="newPlaylist.name">
-                  <input type="submit" valude="Add new Playlist">
-               </form>
-            
-               <a id="logout" href="/logout" class="btn btn-danger">Log Out</a>
-            </div>
-         </div>
-      </div>
-   </div>
+  <div ng-controller="UnivJamController">
+    <h1>Profile</h1>
+    <hr>
+    <h2>Hey {{user.name}}!</h2>
+    <hr>
+    <h2>My Playlists:</h2>
+    <input type="text" ng-model="search" placeholder="Search for a playlist">
+    <ul>
+      <li ng-repeat="playlist in playlists | orderBy: 'created' | filter: search">
+        <a href="/playlist/:id">
+          <h3>{{playlist.name}} - {{playlist.length}}</h3>
+        </a>
+        <div class="remove" ng-click="removePlaylist(playlist)">X</div>
+      </li>
+    </ul>
+    <form ng-submit="addPlaylist(playlist)">
+      <input type="text" placeholder="Add a Playlist" ng-model="newplaylist.name">
+      <input type="submit" value="Add new Playlist">
+    </form>
+    <a class="logout" href="/logout" class="btn btn-danger">Log Out</a>
+  </div>
 </div>
