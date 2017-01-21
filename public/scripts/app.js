@@ -1,6 +1,31 @@
 angular
   .module('univJam', ['ngRoute'])
+  .controller('PlaylistsIndexController', PlaylistsIndexController);
   .config(config);
+
+funciton PlaylistsIndexController () {
+  var vm = this;
+  vm.newPlaylist = {};
+
+  vm.newPlaylist = {
+    name: ""
+  };
+
+  vm.playlists = [
+    {
+      name: 'playlist 1',
+      song: 'song 1'
+    },
+    {
+      name: 'playlist 2',
+      song: 'song 2'
+    },
+    {
+      name: 'playlist 3',
+      song: 'song 3'
+    }
+  ];
+}
 
 config.$inject = ['$routeProvider', '$locationProvider'];
 
