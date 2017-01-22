@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var SChema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 var Song = require('./song');
 

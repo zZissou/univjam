@@ -1,4 +1,3 @@
-// require express framework and additional modules
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -15,9 +14,12 @@ app.use(session({
  secret: 'SuperSecretCookie',
  cookie: { maxAge: 30 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
 }));
+app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 mongoose.connect('mongodb://localhost/simple-login');
+
+var controllers = require('./controllers');
 
 
 app.get('/', function (req, res) {
@@ -34,7 +36,7 @@ app.post('/users', function (req, res) {
  // use the email and password to authenticate here
  User.createSecure(req.body.name, req.body.email, req.body.password, function (err, newUser) {
    req.session.userId = newUser._id;
-   res.redirect('/profile');
+   res.redirect('/playlist');
  });
 });
 
@@ -54,13 +56,13 @@ app.post('/sessions', function (req, res) {
      console.log('setting session user id ', loggedInUser._id);
      req.session.userId = loggedInUser._id;
      console.log("SUCCESSFUL LOGIN");
-     res.redirect('/profile');
+     res.redirect('/playlist.ejs');
    }
  });
 });
 
  // route to the user profile page
- app.get('/profile', function (req, res) {
+ app.get('/playlist', function (req, res) {
  // now find the user currently logged in
  User.findOne({_id: req.session.userId}, function (err, currentUser) {
    res.render('index.html', {user: currentUser})
@@ -72,60 +74,22 @@ app.post('/sessions', function (req, res) {
  // remove the session user id
  req.session.userId = null;
  // redirect to login (for now)
- res.redirect('/home');
+ res.redirect('/');
 });
 
+app.get('/api', controllers.api.index);
+
+app.get('/api/playlists', controllers.playlists.index);
+app.get('/api/playlists/:playlistId', controllers.playlists.show);
+app.post('/api/playlists', controllers.playlists.create);
+app.delete('/api/playlists/:playlistId', controllers.playlists.destroy);
+app.put('/api/playlists/:playlistId', controllers.playlists.update);
+
+app.get('/api/playlists/:playlistId/songs', controllers.playlistsSongs.index);
+app.post('/api/playlists/:playlistId/songs', controllers.playlistsSongs.create);
+app.delete('/api/playlists/:playlistId/songs/:songId', controllers.playlistsSongs.destroy);
 
 // listen on port 3000
 app.listen(3000, function () {
  console.log('server started on locahost:3000');
 });
-
-function onYouTubeIframeAPIReadyx() {
-  var ctrlq = document.getElemntById("youtube-audio")
-
-  var icons = document.createElement("img");
-  icon.setAttribute("id", "youtube-icon");
-  icon.style.cssText = "cursor:pointer;cursor:hand";
-  ctrlq.appendChild(icon);
-
-  var div = document.createElement("div");
-  div.setAttribute("id", "youtube-player");
-  ctrlq.appendChild(div);
-
-  var toggleButton = function (play) {
-    var img = play ? "IDzX9gl.png" : "quyUPXN.png";
-    icon.setAttribute("src", "https://i.imgur.com/" + img);
-  }
-
-  ctrlq.onClick = function () {
-    if (player.getPlayerState() === YT.PlayerState.PLAYING || player.getPlayerState() === YT.PlayerState.BUFFERING ) {
-      player.pauseVideio();
-      toggleButton(false);
-    } else {
-      player.playVideo();
-      toggleButton(true);
-    }
-  };
-
-  var player = new YT.Player('youtube-player', {
-    height: '10',
-    width: '10',
-    videoId: ctrlq.dataset.video,
-    playerVars: {
-      autoplay: ctrlq.dataset.autoplay,
-      loop: ctrlq.dataset.loop,
-    },
-    events: {
-      'onReady': function(e) {
-        player.setPlaybackQuality("small");
-        toggleButton(player.getPlayerState() !== YT.PlayerState.CUED);
-      },
-      'onStateChange': function(e) {
-        if (e.data === YT.PlayerState.ENDED) {
-          toggleButton(flase);
-        }
-      }
-    }
-  });
-}

@@ -5,9 +5,8 @@ angular
 PlaylistsIndexController.$inject = ['http'];
 
 function PlaylistsIndexController ($http) {
-  varm vm = this;
+  var vm = this;
   vm.newPlaylist = {};
-  };
 
   $http({
     method: 'GET',
@@ -28,7 +27,7 @@ function PlaylistsIndexController ($http) {
     }, function errCallback(response) {
       console.log('There was an error posting the data', response);
     });
-  }
+  };
 
   vm.editPlaylist = function (playlist) {
     $http({
@@ -38,8 +37,8 @@ function PlaylistsIndexController ($http) {
     }).then(function successCallback(json) {
     }, function errorCallback(response) {
       console.log('There was an error editing the data', response);
-  });
-  }
+    });
+  };
 
   vm.deletePlaylist = function (playlist) {
     $http({
@@ -48,8 +47,8 @@ function PlaylistsIndexController ($http) {
     }).then(function successCallback(json) {
       var index = vm.playlists.indexOf(playlist);
       vm.playlists.splice(index,1);
-    }, funciton errorCallback(response) {
+    }, function errorCallback(response) {
       console.log('There was an error deleting the data', response);
     });
-  }
-}
+  };
+};

@@ -1,6 +1,6 @@
 angular
   .module('univjam')
-  .controller('PlaylistsShowController', PlaylistShowController);
+  .controller('PlaylistsShowController', PlaylistsShowController);
 
 PlaylistsShowController.$inject = ['$http', '$routeParams'];
 
@@ -28,13 +28,13 @@ function PlaylistsShowController($http, $routeParams) {
     });
   }
 
-  vm.deleteSong = function (song) new Promise(function(resolve, reject) {
+  vm.deleteSong = function (song) {
     $http({
       method: 'DELETE',
       url: '/api/playlists/'+ $routeParams.id + '/songs/' + song._id
     }).then(function successCallback(json) {
       var idnex = vm.playlist.songs.indexOf(song);
-      vm.album.songs.splice(index, 1);
+      vm.playlist.songs.splice(index, 1);
     }, function errorCallback(response) {
       console.log('There was an error deleting the data', response);
     });

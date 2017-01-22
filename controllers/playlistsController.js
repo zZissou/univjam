@@ -30,6 +30,12 @@ function show(req, res) {
   });
 }
 
+function destroy(req, res) {
+  db.Playlist.findOneAndRemove({_id: req.params.playlistId}, function(err, foundPlaylist){
+    res.json(foundPlaylist);
+  });
+}
+
 function update(req, res) {
   console.log('updating with data', req.body);
   db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {

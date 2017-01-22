@@ -2,24 +2,26 @@ angular
   .module('univjam', ['ngRoute', 'ngAnimate'])
   .config(config);
 
+config.$inject = ['$routeProvider', '$locationProvider'];
+
 function config($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: '/home'
+      templateUrl: '/templates/home.ejs'
     })
-    .when('/playlists', {
-      templateUrl: '/templates/playlists',
+    .when('/playlist', {
+      templateUrl: '/templates/playlist.ejs',
       controller: 'PlaylistsIndexController'
     })
     .when('/playlists/:id', {
-      templateUrl: '/templates/playlists-show',
+      templateUrl: '/templates/playlists-show.html',
       controller: 'PlaylistsShowController'
     })
     .when('/login', {
-      templateUrl: 'login.ejs'
+      templateUrl: '/templates/login.ejs'
     })
     .when('/signup', {
-      templateUrl: 'signup.ejs'
+      templateUrl: '/templates/signup.ejs'
     })
     .otherwise({
       redirectTo: '/'
@@ -73,7 +75,7 @@ function onYouTubeIframeAPIReadyx() {
       },
       'onStateChange': function(e) {
         if (e.data === YT.PlayerState.ENDED) {
-          toggleButton(flase);
+          toggleButton(false);
         }
       }
     }

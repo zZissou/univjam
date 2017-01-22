@@ -1,5 +1,6 @@
-var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/univjam_test");
+var mongoose = require('mongoose');
+mongoose.createConnection('mongodb://localhost/univjam');
+
 
 var Playlist = require('./playlist');
 
