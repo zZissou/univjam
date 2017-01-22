@@ -1,68 +1,66 @@
 //index Controller
-var univJam = angular.module('univJam', ['ngRoute', 'ngAnimate']);
-
-univJam.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
-
-  $locationProvider.html5Mode(true);
-
-  $routeProvider
-    .when('/', {
-    templateUrl: 'home.ejs'
-    })
-    .when('/profile', {
-      templateUrl: 'profile.ejs',
-      controller: 'UnivJamController'
-    })
-    .when('/login', {
-      templateUrl: 'login.ejs'
-    })
-    .when('/signup', {
-      templateUrl: 'signup.ejs'
-    })
-    .when('/playlist', {
-      templateUrl: 'playlist.ejs',
-      controller: 'UnivJamController'
-    }).otherwise({
-      redirectTo: '/'
-    });
-
-}]);
-
-//main controller
-univJam.controller('UnivJamController', ['$scope', function($scope){
-
-  $scope.removePlaylist = function(playlist){
-    var removedPlaylist = $scope.playlists.indexOf(playlist);
-    $scope.playlists.splice(removedPlaylist, 1);
-  }
-
-  $scope.addPlaylist = function(playlist){
-    $scope.playlists.push({
-      name: $scope.newplaylist.name,
-      length: ""
-    });
-
-    $scope.newplaylist.name = "";
-  };
-
-  $scope.playlists = [
-    {
-      name: "Work Playlist",
-      length: "1.5 hours"
-    },
-    {
-      name: "Home Playlist",
-      length: "8 hours"
-    },
-    {
-      name: "FOTM Playlist",
-      length: "18 hours"
-    }
-  ];
-
-}]);
-
-
+// var univjam = angular.module('univjam', ['ngRoute', 'ngAnimate']);
+//
+// univjam.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
+//
+//   $locationProvider.html5Mode(true);
+//
+//   $routeProvider
+//     .when('/', {
+//     templateUrl: 'home.ejs'
+//     })
+//     .when('/profile', {
+//       templateUrl: 'profile.ejs',
+//       controller: 'UnivJamController'
+//     })
+//     .when('/login', {
+//       templateUrl: 'login.ejs'
+//     })
+//     .when('/signup', {
+//       templateUrl: 'signup.ejs'
+//     })
+//     .when('/playlist', {
+//       templateUrl: 'playlist.ejs',
+//       controller: 'UnivJamController'
+//     }).otherwise({
+//       redirectTo: '/'
+//     });
+//
+// }]);
+//
+// //main controller
+// univjam.controller('UnivJamController', ['$scope', function($scope){
+//
+//   $scope.removePlaylist = function(playlist){
+//     var removedPlaylist = $scope.playlists.indexOf(playlist);
+//     $scope.playlists.splice(removedPlaylist, 1);
+//   }
+//
+//   $scope.addPlaylist = function(playlist){
+//     $scope.playlists.push({
+//       name: $scope.newplaylist.name,
+//       length: ""
+//     });
+//
+//     $scope.newplaylist.name = "";
+//   };
+//
+//   $scope.playlists = [
+//     {
+//       name: "Work Playlist",
+//       length: "1.5 hours"
+//     },
+//     {
+//       name: "Home Playlist",
+//       length: "8 hours"
+//     },
+//     {
+//       name: "FOTM Playlist",
+//       length: "18 hours"
+//     }
+//   ];
+//
+// }]);
 
 
 
@@ -71,7 +69,9 @@ univJam.controller('UnivJamController', ['$scope', function($scope){
 
 
 
-// univJam.config(['$routeProvider', function($routeProvider){
+
+
+// univjam.config(['$routeProvider', function($routeProvider){
 //
 //   $routeProvider
 //     .when('/home', {
@@ -87,7 +87,7 @@ univJam.controller('UnivJamController', ['$scope', function($scope){
 //     });
 // }]);
 //
-// univJam.controller('PlaylistController', ['$scope', '$http', function($scope, $http){
+// univjam.controller('PlaylistController', ['$scope', '$http', function($scope, $http){
 //   $scope.addPlaylist = function({
 //     $scope.playlists.push({
 //       name: $scope.newplaylist.name,
@@ -103,7 +103,7 @@ univJam.controller('UnivJamController', ['$scope', function($scope){
 //     };
 // )}];
 //
-// univJam.controller('SongController', ['$scope', '$http', function ($scope, $http){
+// univjam.controller('SongController', ['$scope', '$http', function ($scope, $http){
 //
 //   $scope.removeSong = function(song){
 //     var removedSong = $scope.songs.indexOf(song);

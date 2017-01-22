@@ -1,5 +1,5 @@
 angular
-  .module('univJam')
+  .module('univjam')
   .controller('PlaylistsIndexController', PlaylistsIndexController);
 
 PlaylistsIndexController.$inject = ['http'];
@@ -44,7 +44,7 @@ function PlaylistsIndexController ($http) {
   vm.deletePlaylist = function (playlist) {
     $http({
       method: 'DELETE',
-      url: '/api/albums/'+ album._id
+      url: '/api/playlists/'+ playlist._id
     }).then(function successCallback(json) {
       var index = vm.playlists.indexOf(playlist);
       vm.playlists.splice(index,1);

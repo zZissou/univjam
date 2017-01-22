@@ -1,59 +1,34 @@
 angular
-  .module('univJam', ['ngRoute'])
-  .controller('PlaylistsIndexController', PlaylistsIndexController);
+  .module('univjam', ['ngRoute', 'ngAnimate'])
   .config(config);
 
-funciton PlaylistsIndexController () {
-  var vm = this;
-  vm.newPlaylist = {};
-
-  vm.newPlaylist = {
-    name: ""
-  };
-
-  vm.playlists = [
-    {
-      name: 'playlist 1',
-      song: 'song 1'
-    },
-    {
-      name: 'playlist 2',
-      song: 'song 2'
-    },
-    {
-      name: 'playlist 3',
-      song: 'song 3'
-    }
-  ];
-}
-
-config.$inject = ['$routeProvider', '$locationProvider'];
-
-function config ($routeProvider, $locationProvider) {
+function config($routeProvider, $locationProvider) {
   $routeProvider
-  .when('/', {
-  templateUrl: 'home.ejs'
-  })
-  .when('/profile', {
-    templateUrl: 'profile.ejs',
-    controller: 'UnivJamController'
-  })
-  .when('/login', {
-    templateUrl: 'login.ejs'
-  })
-  .when('/signup', {
-    templateUrl: 'signup.ejs'
-  })
-  .when('/playlist/:id', {
-    templateUrl: 'playlist.ejs',
-    controller: 'UnivJamController'
-  }).otherwise({
-    redirectTo: '/'
-  })
+    .when('/', {
+      templateUrl: '/home'
+    })
+    .when('/playlists', {
+      templateUrl: '/templates/playlists',
+      controller: 'PlaylistsIndexController'
+    })
+    .when('/playlists/:id', {
+      templateUrl: '/templates/playlists-show',
+      controller: 'PlaylistsShowController'
+    })
+    .when('/login', {
+      templateUrl: 'login.ejs'
+    })
+    .when('/signup', {
+      templateUrl: 'signup.ejs'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
+
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
-  });
+    });
 }
 
 function onYouTubeIframeAPIReadyx() {
