@@ -2,7 +2,7 @@ angular
   .module('univjam')
   .controller('PlaylistsIndexController', PlaylistsIndexController);
 
-PlaylistsIndexController.$inject = ['http'];
+PlaylistsIndexController.$inject = ['$http'];
 
 function PlaylistsIndexController ($http) {
   var vm = this;
@@ -15,7 +15,7 @@ function PlaylistsIndexController ($http) {
     vm.playlists = response.data;
   }, function errorCallback(response) {
     console.log('There was an error getting the data', response);
-  });
+});
 
   vm.createPlaylist = function () {
     $http({
@@ -23,11 +23,13 @@ function PlaylistsIndexController ($http) {
       url: '/api/playlists',
       data: vm.newPlaylist,
     }).then(function successCallback(response) {
+      console.log("create successful")
+      console.log(response.data);
       vm.playlists.push(response.data);
     }, function errCallback(response) {
       console.log('There was an error posting the data', response);
     });
-  };
+  }
 
   vm.editPlaylist = function (playlist) {
     $http({
@@ -35,6 +37,7 @@ function PlaylistsIndexController ($http) {
       url: '/api/playlists/'+playlist._id,
       data: playlist
     }).then(function successCallback(json) {
+      //don't need anything
     }, function errorCallback(response) {
       console.log('There was an error editing the data', response);
     });
@@ -46,9 +49,10 @@ function PlaylistsIndexController ($http) {
       url: '/api/playlists/'+ playlist._id
     }).then(function successCallback(json) {
       var index = vm.playlists.indexOf(playlist);
-      vm.playlists.splice(index,1);
+      vm.playlists.splice(index, 1);
     }, function errorCallback(response) {
       console.log('There was an error deleting the data', response);
     });
-  };
-};
+  }
+
+}

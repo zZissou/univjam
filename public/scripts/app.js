@@ -1,5 +1,5 @@
 angular
-  .module('univjam', ['ngRoute', 'ngAnimate'])
+  .module('univjam', ['ngRoute'])
   .config(config);
 
 config.$inject = ['$routeProvider', '$locationProvider'];
@@ -7,21 +7,19 @@ config.$inject = ['$routeProvider', '$locationProvider'];
 function config($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: '/templates/home.ejs'
+      templateUrl: '/templates/playlist',
+      controllerAs: 'playlistsIndexCtrl',
+      controller: 'PlaylistsIndexController'
     })
     .when('/playlist', {
-      templateUrl: '/templates/playlist.ejs',
+      templateUrl: '/templates/playlist',
+      controllerAs: 'playlistsIndexCtrl',
       controller: 'PlaylistsIndexController'
     })
     .when('/playlists/:id', {
-      templateUrl: '/templates/playlists-show.html',
+      templateUrl: '/templates/playlists-show',
+      controllerAs: 'playlistsShowCtrl',
       controller: 'PlaylistsShowController'
-    })
-    .when('/login', {
-      templateUrl: '/templates/login.ejs'
-    })
-    .when('/signup', {
-      templateUrl: '/templates/signup.ejs'
     })
     .otherwise({
       redirectTo: '/'
@@ -33,10 +31,11 @@ function config($routeProvider, $locationProvider) {
     });
 }
 
-function onYouTubeIframeAPIReadyx() {
-  var ctrlq = document.getElemntById("youtube-audio")
 
-  var icons = document.createElement("img");
+function onYouTubeIframeAPIReadyx() {
+  var ctrlq = document.getElementById("youtube-audio")
+
+  var icon = document.createElement("img");
   icon.setAttribute("id", "youtube-icon");
   icon.style.cssText = "cursor:pointer;cursor:hand";
   ctrlq.appendChild(icon);
@@ -61,8 +60,8 @@ function onYouTubeIframeAPIReadyx() {
   };
 
   var player = new YT.Player('youtube-player', {
-    height: '10',
-    width: '10',
+    height: '0',
+    width: '0',
     videoId: ctrlq.dataset.video,
     playerVars: {
       autoplay: ctrlq.dataset.autoplay,

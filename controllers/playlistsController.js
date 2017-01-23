@@ -1,8 +1,5 @@
-//DATABASE
-
 var db = require('../models');
 
-//GET /api/playlists
 function index(req, res) {
   db.Playlist.find({},
   function(err, allPlaylists) {
@@ -12,7 +9,6 @@ function index(req, res) {
 
 function create(req, res) {
   console.log('body', req.body);
-
   db.Playlist.create(req.body, function(err, playlist) {
     if (err) {
     console.log('error', err); }
@@ -22,7 +18,7 @@ function create(req, res) {
 }
 
 function show(req, res) {
-  db.Playlist.findbyId(req.params.playlistID, function(err, foundPlaylist) {
+  db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {
     if(err) {
       console.log('playlistsController.show error', err); }
       console.log('playlistsController.show responding with', foundPlaylist);

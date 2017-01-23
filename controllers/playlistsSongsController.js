@@ -1,6 +1,5 @@
 var db = require('../models');
 
-//app.get('/api/playlists/:playlistId/songs', controllers.playlistsSongs.index);
 function index(req, res) {
   db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {
     console.log('responding with songs:', foundPlaylist.songs);
@@ -8,11 +7,10 @@ function index(req, res) {
   });
 }
 
-//POST '/api/playlists/:playlistId/songs'
 function create(req, res) {
-  dbPlaylist.findById(req.params.playlistId, function(err, foundPlaylist) {
+  db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {
     console.log(req.body);
-    varnewSong = new db.Song(req.body);
+    var newSong = new db.Song(req.body);
     foundPlaylist.songs.push(newSong);
     foundPlaylist.save(function(err, savedPlaylist) {
       console.log('newSong created: ', newSong);
@@ -21,13 +19,12 @@ function create(req, res) {
   });
 }
 
-//app.delete('/api/playlists/:playlistId/songs/song:id', controllers.playlistsSongs.destroy);
 function destroy(req, res) {
   db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {
     console.log(foundPlaylist);
     var correctSong = foundPlaylist.songs.id(req.params.songId);
     if (correctSong) {
-      correctSongremove();
+      correctSong.remove();
       foundPlaylist.save(function(err, saved) {
         console.log('REMOVED ', correctSong.name, 'FROM', saved.songs);
         res.json(correctSong);

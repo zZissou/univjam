@@ -1,0 +1,21 @@
+{
+  "name": "univjam",
+  "version": "1",
+  "homepage": "",
+  "authors": [
+    "https://github.com/zZissou"
+  ],
+  "license": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.7",
+    "angular": "~1.5.3",
+    "angular-route": "~1.5.3"
+  }
+}
