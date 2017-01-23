@@ -1,14 +1,8 @@
-<script src="https://www.youtube.com/iframe_api"></script>
-<script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
     <form class="form-horizontal" ng-submit="playlistsIndexCtrl.createPlaylist()">
         <div class="form-group">
           <label class="col-md-4 control-label">Playlist Name</label>
-          <div class="col-md-4">
-          <input id="name" ng-model="playlistsIndexCtrl.newPlaylist.name" type="text" class="form-control input-md" required="">
-          </div>
+            <input id="name" ng-model="playlistsIndexCtrl.newPlaylist.name" type="text" class="form-control input-md" required="">
         </div>
         <div class="form-group">
           <label class="col-md-4 control-label">Save Playlist</label>
@@ -16,41 +10,12 @@
             <button class="btn btn-primary">Submit</button>
           </div>
         </div>
-      </fieldset>
     </form>
-  </div>
-</div>
 
 <input type="text" class="form-control" ng-model="searchText" placeholder="Search Playlists">
-<div ng-repeat="playlist in playlistsIndexCtrl.playlists" class="row">
-  <div class="col-md-10 col-md-offset-1">
+<div ng-repeat="playlist in playlistsIndexCtrl.playlists">
     <div class="panel panel-default">
-      <div class="panel-body">
-        <div class='row'>
-          <div class="col-md-3 col-xs-12 thumbnail">
-            <div class="playlist-title">
-              <h2 ng-hide="editing">{{playlist.name}}</h2>
-              <input ng-show="editing" ng-model="playlist.name" type="text" class="form-control input-md">
-            </div>
-            <div class="playlist-length">
-              <p>Length:{{playlist.length}}</p>
-            </div>
-          </div>
-          <div class="col-md-9 col-xs-12">
-            <ul class="list-group form-inline">
-              <li class="list-group-item" ng-repeat="song in playlistsShowCtrl.playlist.songs">
-                <span>{{song.name}}</span>
-                <div data-video="savCAd6RyPI" ng-hide="editing"
-                data-autoplay="0"
-                data-loop="0"
-                id="youtube-audio">
-                </div>
-                <script src="https://www.youtube.com/iframe_api"></script>
-                <script src="https://cdn.rawgit.com/labnol/files/master/yt.js"></script>
-                <button type="button" class="btn btn-danger" ng-show="editing" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span></button>
-              </li>
-            </ul>
-          </div>
+        <a ng-href="playlists/{{playlist._id}}">{{playlist.name}}</a>
           <div class='panel-footer'>
             <div class='panel-footer'>
               <button class='btn btn-danger' ng-click="playlistsIndexCtrl.deletePlaylist(playlist)">Delete Playlist</button>
