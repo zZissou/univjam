@@ -1,5 +1,5 @@
 angular
-  .module('univjam', ['ngRoute'])
+  .module('univjam', ['ngRoute', 'ngYoutubeEmbed'])
   .config(config, ['$sceProvider', function($sceProvider){
   }]);
 

@@ -11,6 +11,7 @@ function create(req, res) {
   db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {
     console.log(req.body);
     var newSong = new db.Song(req.body);
+    newSong.link = "https://www.youtube.com/embed?listType=search;list=" + req.params.song.name;
     foundPlaylist.songs.push(newSong);
     foundPlaylist.save(function(err, savedPlaylist) {
       console.log('newSong created: ', newSong);

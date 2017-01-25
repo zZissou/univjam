@@ -1,13 +1,10 @@
 angular
   .module('univjam')
-  .controller('PlaylistsShowController', PlaylistsShowController);
+  .controller('PlaylistsShowController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
 
-PlaylistsShowController.$inject = ['$http', '$routeParams'];
-
-
-function PlaylistsShowController($http, $routeParams) {
   var vm = this;
   vm.newSong = {};
+ $scope.link = 'https://www.youtube.com/watch?v=86JQV_m_i9w';
 
   $http({
     method: 'GET',
@@ -42,4 +39,4 @@ function PlaylistsShowController($http, $routeParams) {
       console.log('There was an error deleting the song', response);
     });
   }
-}
+}]);
