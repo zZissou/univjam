@@ -1,10 +1,11 @@
 angular
   .module('univjam', ['ngRoute'])
-  .config(config);
+  .config(config, ['$sceProvider', function($sceProvider){
+  }]);
 
-config.$inject = ['$routeProvider', '$locationProvider'];
+config.$inject = ['$routeProvider', '$locationProvider', '$sceProvider'];
 
-function config($routeProvider, $locationProvider) {
+function config($routeProvider, $locationProvider, $sceProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/templates/playlist',
@@ -29,4 +30,7 @@ function config($routeProvider, $locationProvider) {
       enabled: true,
       requireBase: false
     });
+
+    $sceProvider.enabled(false);
+
 }

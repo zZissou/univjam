@@ -1,4 +1,4 @@
-
+<div>
     <form class="form-horizontal" ng-submit="playlistsIndexCtrl.createPlaylist()">
         <div class="form-group">
           <label class="col-md-4 control-label">Playlist Name</label>
@@ -16,6 +16,9 @@
 <div ng-repeat="playlist in playlistsIndexCtrl.playlists">
     <div class="panel panel-default">
         <a ng-href="playlists/{{playlist._id}}">{{playlist.name}}</a>
+          <div ng-repeat="song in playlist.songs">
+            <p>{{song.name}}</p>
+          </div>
           <div class='panel-footer'>
             <div class='panel-footer'>
               <button class='btn btn-danger' ng-click="playlistsIndexCtrl.deletePlaylist(playlist)">Delete Playlist</button>
@@ -27,4 +30,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

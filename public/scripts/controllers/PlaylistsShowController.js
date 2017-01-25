@@ -4,6 +4,7 @@ angular
 
 PlaylistsShowController.$inject = ['$http', '$routeParams'];
 
+
 function PlaylistsShowController($http, $routeParams) {
   var vm = this;
   vm.newSong = {};

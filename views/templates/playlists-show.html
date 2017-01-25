@@ -1,15 +1,63 @@
-<h4>{{playlistsShowCtrl.playlist.name}}</h4>
-<div>
-  <h4>{{playlistsShowCtrl.playlist.name}}</h4>
-    <div>
-      <div ng-repeat="song in playlistsShowCtrl.playlist.songs">
-        <p>{{song.name}}</p>
-        <button type="button" class="btn btn-danger" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span>Delete Song</button>
-      </div>
-      <div>
-        <input ng-model="playlistsShowCtrl.newSong.name" placeholder="Track name" type="text" class="form-control input-md">
-        <button type="button" class="btn btn-success" ng-click="playlistsShowCtrl.createSong()"><span class="glyphicon glyphicon-plus"></span> Add Song</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+          <div class="panel panel-default">
+            <div class="panel-body">
+                <div ng-controller="PlaylistsShowController as playlistsShowCtrl">
+                  <ul class="list-group form-inline">
+                    <li class="list-group-item">
+                      <h2 class="inline-header" ng-hide="editing">{{playlistsShowCtrl.playlist.name}}</h2>
+                      <input ng-show="editing" ng-model="playlistsShowCtrl.playlist.name" type="text" class="form-control input-md">
+                      <div style="float:right;">
+                        <span><button type="button" class="btn btn-info" ng-hide="editing" ng-click="editing = true"><span class="glyphicon glyphicon-pencil">Edit</span></button>
+                        <button type="button" class="btn btn-success" ng-show="editing" ng-click="editing = false"><span class="glyphicon glyphicon-ok"> Save</span></button>
+                      </div>
+                    </li>
+                    <li ng-repeat="song in playlistsShowCtrl.playlist.songs" class="list-group-item">
+                      <h4>{{song.name}}</h4>
+                      <button style="float:right;" ng-show="editing" type="button" class="btn btn-danger" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span></button>
+                      <iframe  src="{{'https://www.youtube.com/embed?listType=search;list='+song.name}}" frameborder="0" width="90%" height="100"></iframe>
+                    </li>
+                    <li id="myVideo" class="list-group-item">
+                      <h4>Sunset in babylon the ugly</h4>
+                      <iframe width="90%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212412320&amp"></iframe>
+                    </li>
+                    <li class="list-group-item" "myVideo">
+                      <h4>Sunset in babylon the ugly</h4>
+                      <iframe width="90%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212412320&amp"></iframe>
+                    </li>
+                  </ul>
+                  <div>
+                    <input ng-model="playlistsShowCtrl.newSong.name" placeholder="Track name" type="text" class="form-control input-md">
+                    <button type="button" class="btn btn-success" ng-click="playlistsShowCtrl.createSong()"><span class="glyphicon glyphicon-plus"></span>Add/Delete Song</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-      </div>
-    </div>
+                    <div>
+                      <div ng-repeat="song in playlistsShowCtrl.playlist.songs">
+                        <p>{{song.name}}</p>
+                        <iframe  src="{{'https://www.youtube.com/embed?listType=search;list='+song.name}}" frameborder="0" width="90%" height="100"></iframe>
+
+                        <button type="button" class="btn btn-danger" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span></button>
+                      </div>
+
+
+                  <div>
+                    <p>Search</p>
+
+                    <form action="https://soundcloud.com/search?q=" method="get" target="_blank">
+                      <input name="q" type="text" maxlength="128" />
+                    <form action="http://www.youtube.com/results" method="get" target="_blank">
+                      <input name="search_query" type="text" maxlength="128" />
+                      </select>
+                      <input type="submit" value="Search" />
+                    </form>
+                    <h1>END</h1>
+                    <iframe width="30%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212412320&amp"></iframe>
+
+
 </div>
