@@ -32,5 +32,4 @@ function config($routeProvider, $locationProvider, $sceProvider) {
     });
 
     $sceProvider.enabled(false);
-
 }

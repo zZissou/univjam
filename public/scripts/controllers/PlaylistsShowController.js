@@ -4,7 +4,6 @@ angular
 
   var vm = this;
   vm.newSong = {};
- $scope.link = 'https://www.youtube.com/watch?v=86JQV_m_i9w';
 
   $http({
     method: 'GET',
@@ -16,16 +15,55 @@ angular
   });
 
   vm.createSong = function (song) {
-    $http({
-        method: 'POST',
-        url: '/api/playlists/'+$routeParams.id + '/songs',
-        data: vm.newSong
-    }).then(function successCallback(response) {
-        vm.playlist.songs.push(response.data);
-    }, function errorCallback(response) {
-        console.log('There was an error posting the song', response);
-    });
-}
+    search();
+    // $http({
+    //     method: 'POST',
+    //     url: '/api/playlists/'+$routeParams.id + '/songs',
+    //     data: song
+    // }).then(function successCallback(response) {
+    //     vm.playlist.songs.push(response.data);
+    // }, function errorCallback(response) {
+    //     console.log('There was an error posting the song', response);
+    // });
+  }
+
+function search(){
+
+  q = $('#query').val();
+
+  $.get(
+    "https://www.googleapis.com/youtube/v3/search",{
+      part: 'snippet, id',
+      q: q,
+      type: 'video',
+      key: 'AIzaSyAIYjJ-kpwYLGD-uQL7_WaGxZ_GwyT5Gv0'},
+      function(data){
+        var nextPageToken = data.nextPageToken;
+        var prevPageToken = data.prevPageToken;
+
+        console.log(data.items[0].id.videoId,
+          data.items[0].snippet.title,
+          data.items[0].snippet.thumbnails.default.url);
+
+        $http({
+            method: 'POST',
+            url: '/api/playlists/'+ $routeParams.id + '/songs',
+            data: data
+        }).then(function successCallback(response) {
+            vm.playlist.songs.push(response.data);
+        }, function errorCallback(response) {
+            console.log('There was an error posting the song', response);
+        });
+      }
+    );
+
+  }
+
+  function getOutput(item) {
+    var videoId = data.items[0].id.videoId;
+    var title = data.items[0].snippet.title;
+    var thumbnail = data.items[0].snippet.thumbnails.default.url
+  }
 
   vm.deleteSong = function (song) {
     $http({

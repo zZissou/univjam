@@ -9,46 +9,35 @@
                       <h2 class="inline-header" ng-hide="editing">{{playlistsShowCtrl.playlist.name}}</h2>
                       <input ng-show="editing" ng-model="playlistsShowCtrl.playlist.name" type="text" class="form-control input-md">
                       <div style="float:right;">
+                        <form id="search-form" name="search-form" ngsubmit="return search()">
+                          <div class="fieldcontainer">
+                            <input ng-model="playlistsShowCtrl.newSong.name" id="query" placeholder="Track name" type="text" class="form-control input-md search-field">
+                            <input type="submit" name="search-btn" id="search-btn"  class="btn btn-success" ng-click="playlistsShowCtrl.createSong()" value="Add a Song">
+                          </div>
+                        </form>
                         <span><button type="button" class="btn btn-info" ng-hide="editing" ng-click="editing = true"><span class="glyphicon glyphicon-pencil">Edit</span></button>
                         <button type="button" class="btn btn-success" ng-show="editing" ng-click="editing = false"><span class="glyphicon glyphicon-ok"> Save</span></button>
                       </div>
                     </li>
                     <li ng-repeat="song in playlistsShowCtrl.playlist.songs" class="list-group-item">
-                      <h4>{{song.name}}</h4>
+                      <h2>{{song.name}}</h2>
+                      <img src="{{song.thumbnail}}">
+                      <span><iframe class="embed-responsive-item"id="ytplayer" type="text/html" width="60%" height="100" src="{{'https://www.youtube.com/embed/'+song.id+'?rel=0&enablejsapi=1'}}" frameborder="0" allowfullscreen></iframe></span>
                       <button style="float:right;" ng-show="editing" type="button" class="btn btn-danger" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span></button>
-                      <iframe  src="{{'https://www.youtube.com/embed?listType=search;list='+song.name}}" frameborder="0" width="90%" height="100"></iframe>
-                    </li>
-                    <li id="myVideo" class="list-group-item">
-                      <h4>Sunset in babylon the ugly</h4>
-                      <iframe width="90%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212412320&amp"></iframe>
-                    </li>
-                    <li class="list-group-item" "myVideo">
-                      <h4>Sunset in babylon the ugly</h4>
-                      <iframe width="90%" height="100" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/212412320&amp"></iframe>
                     </li>
                   </ul>
                   <div>
-                    <input ng-model="playlistsShowCtrl.newSong.name" placeholder="Track name" type="text" class="form-control input-md">
-                    <button type="button" class="btn btn-success" ng-click="playlistsShowCtrl.createSong()"><span class="glyphicon glyphicon-plus"></span>Add/Delete Song</button>
+                    <form id="search-form" name="search-form" ngsubmit="return search()">
+                      <div class="fieldcontainer">
+                        <input ng-model="playlistsShowCtrl.newSong.name" id="query" placeholder="Track name" type="text" class="form-control input-md search-field">
+                        <input type="submit" name="search-btn" id="search-btn"  class="btn btn-success" ng-click="playlistsShowCtrl.createSong()" value="Add a Song">
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-                    <div>
-                      <div ng-repeat="song in playlistsShowCtrl.playlist.songs">
-                        <p>{{song.name}}</p>
-                        <iframe  src="{{'https://www.youtube.com/embed?listType=search;list='+song.name}}" frameborder="0" width="90%" height="100"></iframe>
-
-                        <button type="button" class="btn btn-danger" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span></button>
-                      </div>
-
-
-
-                    <ng-youtube-embed url="link" fs="false" width="50%">
-                    </ng-youtube-embed>
-
-
+      </div>
 </div>

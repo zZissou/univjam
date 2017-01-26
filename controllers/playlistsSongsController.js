@@ -8,10 +8,15 @@ function index(req, res) {
 }
 
 function create(req, res) {
+  console.log("coming from create \n");
+  console.log(req.body.items[0].snippet.thumbnails.default.url);
   db.Playlist.findById(req.params.playlistId, function(err, foundPlaylist) {
-    console.log(req.body);
-    var newSong = new db.Song(req.body);
-    newSong.link = "https://www.youtube.com/embed?listType=search;list=" + req.params.song.name;
+    console.log(foundPlaylist);
+    var newSong = new db.Song();
+    newSong.name = req.body.items[0].snippet.title;
+    newSong.id = req.body.items[0].id.videoId;
+    newSong.thumbnail = req.body.items[0].snippet.thumbnails.default.url;
+    newSong.save()
     foundPlaylist.songs.push(newSong);
     foundPlaylist.save(function(err, savedPlaylist) {
       console.log('newSong created: ', newSong);
