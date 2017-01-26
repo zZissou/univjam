@@ -1,34 +1,36 @@
-<div>
-    <form class="form-horizontal" ng-submit="playlistsIndexCtrl.createPlaylist()">
-        <div class="form-group">
-          <label class="col-md-4 control-label">Playlist Name</label>
-            <input id="name" ng-model="playlistsIndexCtrl.newPlaylist.name" type="text" class="form-control input-md" required="">
+<div style-"margin:0;" class="col-md-12 container image">
+  <div style="margin-top:10%;border-radius:25px; border: 2px solid black; background-color: white; opacity: 0.7;" class="col-md-10 col-md-offset-1">
+    <div class="top-section">
+      <form style="padding-top:40px;" class="col-md-6 form-inline" ng-submit="playlistsIndexCtrl.createPlaylist()">
+        <div class="form-group col-md-12">
+          <input class="form-control col-md-8" style="width: 60%; height: 40px; float:left;" id="name" ng-model="playlistsIndexCtrl.newPlaylist.name" type="text" required="" style="font-weight: bold;" placeholder="Create a Playlist">
+          <button style="height: 40px; margin-left: 3%; border-radius:10%;" class="btn btn-success fa fa-plus"></button>
         </div>
-        <div class="form-group">
-          <label class="col-md-4 control-label">Save Playlist</label>
-          <div class="col-md-4">
-            <button class="btn btn-primary">Submit</button>
-          </div>
-        </div>
-    </form>
+      </form>
+      <form style="padding-top:40px;" class="col-md-6 form-inline">
+        <div class="form-group col-md-12">
+          <button style="float: left; height: 40px; border-radius:10%;" class="btn btn-primary fa fa-search col-md-offset-3"></button>
+          <input style="width: 60%; height: 40px; float:right;" type="text" class="form-control" ng-model="searchText" placeholder="Search Playlists">        <form id="search-form" name="search-form" ngsubmit="return search()"></form>
 
-<input type="text" class="form-control" ng-model="searchText" placeholder="Search Playlists">
-<div ng-repeat="playlist in playlistsIndexCtrl.playlists">
-    <div class="panel panel-default">
-        <a ng-href="playlists/{{playlist._id}}">{{playlist.name}}</a>
-          <div ng-repeat="song in playlist.songs">
-            <p>{{song.name}}</p>
+        </div>
+      </form>
+      </div>
+      <div style="margin-top: 50px;" class="col-md-12">
+        <div style="border: 2px solid black; padding: 20px 0;  margin-bottom: 30px;" class="col-md-12" ng-repeat="playlist in playlistsIndexCtrl.playlists">
+          <div style="min-height: 250px;" class="col-md-5">
+            <h1 style="font-weight:bold; font-color: gray; padding-top:50px; text-align: center; font-size: 50px;"><a style="text-decoration: none; color:gray;" ng-href="playlists/{{playlist._id}}">{{playlist.name}}</a></h1>
+            <div style="text-align: center; padding-top: 30px;">
+              <button style="border-radius: 20%;" class="btn btn-md btn-danger glyphicon glyphicon-remove" ng-click="playlistsIndexCtrl.deletePlaylist(playlist)"></button>
+              <button style="border-radius: 20%;" class="btn btn-md btn-primary glyphicon glyphicon-edit" ng-hide="editing" ng-click="editing = true"></button>
+              <button style="border-radius: 20%;" class='btn btn-success btn-md glyphicon glyphicon-check' ng-show="editing" ng-click="playlistsIndexCtrl.editPlaylist(playlist); editing = false"></button>
+            </div>
           </div>
-          <div class='panel-footer'>
-            <div class='panel-footer'>
-              <button class='btn btn-danger' ng-click="playlistsIndexCtrl.deletePlaylist(playlist)">Delete Playlist</button>
-              <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit Playlist</button>
-              <button class='btn btn-success' ng-show="editing" ng-click="playlistsIndexCtrl.editPlaylist(playlist); editing = false">Save Changes</button>
+          <div class="col-md-5 col-md-offset-1">
+            <div style=class="col-md-12" ng-repeat="song in playlist.songs">
+              <h4 style="font-weight: bold;">{{song.name}}</h4>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>

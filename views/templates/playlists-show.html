@@ -1,43 +1,39 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-          <div class="panel panel-default">
-            <div class="panel-body">
-                <div ng-controller="PlaylistsShowController as playlistsShowCtrl">
-                  <ul class="list-group form-inline">
-                    <li class="list-group-item">
-                      <h2 class="inline-header" ng-hide="editing">{{playlistsShowCtrl.playlist.name}}</h2>
-                      <input ng-show="editing" ng-model="playlistsShowCtrl.playlist.name" type="text" class="form-control input-md">
-                      <div style="float:right;">
-                        <form id="search-form" name="search-form" ngsubmit="return search()">
-                          <div class="fieldcontainer">
-                            <input ng-model="playlistsShowCtrl.newSong.name" id="query" placeholder="Track name" type="text" class="form-control input-md search-field">
-                            <input type="submit" name="search-btn" id="search-btn"  class="btn btn-success" ng-click="playlistsShowCtrl.createSong()" value="Add a Song">
-                          </div>
-                        </form>
-                        <span><button type="button" class="btn btn-info" ng-hide="editing" ng-click="editing = true"><span class="glyphicon glyphicon-pencil">Edit</span></button>
-                        <button type="button" class="btn btn-success" ng-show="editing" ng-click="editing = false"><span class="glyphicon glyphicon-ok"> Save</span></button>
-                      </div>
-                    </li>
-                    <li ng-repeat="song in playlistsShowCtrl.playlist.songs" class="list-group-item">
-                      <h2>{{song.name}}</h2>
-                      <img src="{{song.thumbnail}}">
-                      <span><iframe class="embed-responsive-item"id="ytplayer" type="text/html" width="60%" height="100" src="{{'https://www.youtube.com/embed/'+song.id+'?rel=0&enablejsapi=1'}}" frameborder="0" allowfullscreen></iframe></span>
-                      <button style="float:right;" ng-show="editing" type="button" class="btn btn-danger" ng-click="playlistsShowCtrl.deleteSong(song)"><span class="glyphicon glyphicon-remove"></span></button>
-                    </li>
-                  </ul>
-                  <div>
-                    <form id="search-form" name="search-form" ngsubmit="return search()">
-                      <div class="fieldcontainer">
-                        <input ng-model="playlistsShowCtrl.newSong.name" id="query" placeholder="Track name" type="text" class="form-control input-md search-field">
-                        <input type="submit" name="search-btn" id="search-btn"  class="btn btn-success" ng-click="playlistsShowCtrl.createSong()" value="Add a Song">
-                      </div>
-                    </form>
-                  </div>
-                </div>
+<div style-"margin:0;" class="col-md-12 container image">
+  <div style="margin-top:10%;border-radius:25px; border: 2px solid black; background-color: white; opacity: 0.7; margin-bottom: 200px;" class="col-md-10 col-md-offset-1">
+    <div ng-controller="PlaylistsShowController as playlistsShowCtrl" class="top-section">
+      <h1 style="font-weight: bold;" class="inline-header" ng-hide="editing">{{playlistsShowCtrl.playlist.name}}</h1>
+      <input ng-show="editing" ng-model="playlistsShowCtrl.playlist.name" type="text" class="form-control input-md">
+      <span><button style="float:right; border-radius: 20%;" type="button" class="btn btn-primary" ng-hide="editing" ng-click="editing = true"><span class="glyphicon glyphicon-edit"></span></button>
+      <button style="float:right; border-radius: 20%" type="button" class="btn btn-success btn-md"  ng-show="editing" ng-click="editing = false"><span class="glyphicon glyphicon-check"</span></button>
+          <div style="padding-top:40px;" class="col-md-6 form-inline">
+            <div style="padding-bottom:10px;" class="form-group col-md-12">
+              <div class="fieldcontainer">
+                <input ng-model="playlistsShowCtrl.newSong.name" id="query" placeholder="Track name" type="text" class="form-control input-md search-field">
+                <button type="submit" style="border-radius:20%;" name="search-btn" id="search-btn"  class="btn btn-success fa fa-plus" ng-click="playlistsShowCtrl.createSong()" value=""></button>
               </div>
             </div>
           </div>
+          <ul class="list-group form-inline">
+            <li ng-repeat="song in playlistsShowCtrl.playlist.songs" class="list-group-item col-md-12">
+              <div class="col-md-12">
+                <h2 style="font-weight: bold; float: left; margin-bottom: 10px;" class="">{{song.name}}</h2>
+                <span><button style="margin-top: 20px; height: 40px; margin-left: 3%; border-radius:10%;" class="glyphicon glyphicon-refresh btn btn-primary"></button></span>
+                <span><button style="margin-top: 20px; height: 40px; border-radius:10%;" ng-show="editing" type="button" class="btn btn-danger glyphicon glyphicon-remove" ng-click="playlistsShowCtrl.deleteSong(song)"></button></span>
+              </div>
+              <img style="float:left; padding-right: 10px;" src="{{song.thumbnail}}">
+              <iframe style="float:left;" class="embed-responsive-item"id="ytplayer" type="text/html" width="40%" height="90" controlsEnabled="false"  src="{{'https://www.youtube.com/embed/'+song.id+'?rel=0&controls=2&modestBranding=1&iv_load_policy&fs=0'}}" frameborder="0" allowfullscreen></iframe>
+            </li>
+          </ul>
+          <ul class="list-group form-inline">
+            <li class="list-group-item col-md-12">
+              <div class="col-md-12">
+                <h2 style="font-weight: bold">The Ugly - Sunset in Babylon</h2>
+                <iframe style="margin-top: 30px; float:left;" width="40%" height="90" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/224366633&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
+    </div>
+  </div>
 </div>

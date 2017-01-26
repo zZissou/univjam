@@ -8,11 +8,11 @@ config.$inject = ['$routeProvider', '$locationProvider', '$sceProvider'];
 function config($routeProvider, $locationProvider, $sceProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: '/templates/playlist',
+      templateUrl: '/templates/home',
       controllerAs: 'playlistsIndexCtrl',
       controller: 'PlaylistsIndexController'
     })
-    .when('/playlist', {
+    .when('/playlists', {
       templateUrl: '/templates/playlist',
       controllerAs: 'playlistsIndexCtrl',
       controller: 'PlaylistsIndexController'
