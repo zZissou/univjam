@@ -7,6 +7,7 @@ function index(req, res) {
   });
 }
 
+//looks good. I wonder about adaptability for other APIs
 function create(req, res) {
   console.log("coming from create \n");
   console.log(req.body.items[0].snippet.thumbnails.default.url);
