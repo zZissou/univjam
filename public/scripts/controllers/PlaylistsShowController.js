@@ -1,3 +1,4 @@
+
 angular
   .module('univjam')
   .controller('PlaylistsShowController', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
@@ -14,6 +15,7 @@ angular
     console.log('There was an error getting the data', response);
   });
 
+//hmm...maybre remove this
   vm.createSong = function (song) {
     search();
     // $http({
@@ -31,6 +33,7 @@ function search(){
 
   q = $('#query').val();
 
+///Ah! another API key!!
   $.get(
     "https://www.googleapis.com/youtube/v3/search",{
       part: 'snippet, id',

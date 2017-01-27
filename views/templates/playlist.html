@@ -9,6 +9,7 @@
       </form>
       <form style="padding-top:40px;" class="col-md-6 form-inline">
         <div class="form-group col-md-12">
+          <!--search here looks broken...maybe try jquery? -->
           <button style="float: left; height: 40px; border-radius:10%;" class="btn btn-primary fa fa-search col-md-offset-3"></button>
           <input style="width: 60%; height: 40px; float:right;" type="text" class="form-control" ng-model="searchText" placeholder="Search Playlists">        <form id="search-form" name="search-form" ngsubmit="return search()"></form>
 
@@ -20,11 +21,13 @@
           <div style="min-height: 250px;" class="col-md-5">
             <h1 style="font-weight:bold; font-color: gray; padding-top:50px; text-align: center; font-size: 50px;"><a style="text-decoration: none; color:gray;" ng-href="playlists/{{playlist._id}}">{{playlist.name}}</a></h1>
             <div style="text-align: center; padding-top: 30px;">
+              <!-- Buttons are a little misleading here. Clicking on edit does not take you to edit the playlist really -->
               <button style="border-radius: 20%;" class="btn btn-md btn-danger glyphicon glyphicon-remove" ng-click="playlistsIndexCtrl.deletePlaylist(playlist)"></button>
               <button style="border-radius: 20%;" class="btn btn-md btn-primary glyphicon glyphicon-edit" ng-hide="editing" ng-click="editing = true"></button>
               <button style="border-radius: 20%;" class='btn btn-success btn-md glyphicon glyphicon-check' ng-show="editing" ng-click="playlistsIndexCtrl.editPlaylist(playlist); editing = false"></button>
             </div>
           </div>
+          <!--display UI could be tweaked a bit-->
           <div class="col-md-5 col-md-offset-1">
             <div style=class="col-md-12" ng-repeat="song in playlist.songs">
               <h4 style="font-weight: bold;">{{song.name}}</h4>

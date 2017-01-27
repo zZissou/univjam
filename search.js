@@ -8,6 +8,7 @@ $(document).ready(function() {
   };
 
   // Search for a specified string.
+  //Nice!
   function search() {
     var q = $('#query').val();
     var request = gapi.client.youtube.search.list({

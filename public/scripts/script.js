@@ -32,6 +32,7 @@ function search(){
 
   q = $('#query').val();
 
+//AHHHHH I FOUND YOUR API KEY!!!
   $.get(
     "https://www.googleapis.com/youtube/v3/search",{
       part: 'snippet, id',
